@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Christmas Tree Decorator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="santa-face">
+            <div class="hat">
+                <div class="hat-top"></div>
+                <div class="hat-brim"></div>
+                <div class="hat-pom"></div>
+            </div>
+            <div class="face">
+                <div class="eyes">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+                <div class="beard">
+                    <div class="beard-left"></div>
+                    <div class="beard-right"></div>
+                    <div class="beard-bottom"></div>
+                </div>
+            </div>
+        </div>
+        <h1 class="title-top">Let's make a Christmas tree!</h1>
+        <h2 class="title-bottom">Ho Ho Ho! Merry Christmas!</h2>
+        <p class="click-to-start">Click anywhere to start</p>
+    </div>
+
+    <!-- Step 1: Choose Your Tree -->
+    <div id="step1-screen" class="screen step-screen">
+        <h2 class="step-title">Choose Your Tree</h2>
+        <div class="options-container">
+            <div class="tree-option" data-tree="white">
+                <div class="tree-thumbnail white-tree"></div>
+                <p>Snowy White</p>
+            </div>
+            <div class="tree-option" data-tree="green">
+                <div class="tree-thumbnail green-tree"></div>
+                <p>Classic Green</p>
+            </div>
+            <div class="tree-option" data-tree="pink">
+                <div class="tree-thumbnail pink-tree"></div>
+                <p>Light Pink</p>
+            </div>
+            <div class="tree-option" data-tree="blue">
+                <div class="tree-thumbnail blue-tree"></div>
+                <p>Light Blue</p>
+            </div>
+        </div>
+        <div class="tree-display">
+            <div id="selected-tree" class="tree"></div>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn-1" disabled>&larr;</button>
+            <button class="nav-btn" id="next-btn-1" disabled>Next &rarr;</button>
+        </div>
+    </div>
+
+    <!-- Step 2: Choose Tree Lights -->
+    <div id="step2-screen" class="screen step-screen">
+        <h2 class="step-title">Choose Tree Lights</h2>
+        <div class="options-container">
+            <div class="light-option" data-light="mixed">
+                <div class="light-preview mixed-lights"></div>
+                <p>Mixed Colors</p>
+            </div>
+            <div class="light-option" data-light="white">
+                <div class="light-preview white-lights"></div>
+                <p>White</p>
+            </div>
+            <div class="light-option" data-light="yellow">
+                <div class="light-preview yellow-lights"></div>
+                <p>Yellow</p>
+            </div>
+            <div class="light-option" data-light="orange">
+                <div class="light-preview orange-lights"></div>
+                <p>Orange</p>
+            </div>
+        </div>
+        <div class="tree-display">
+            <div id="tree-with-lights" class="tree">
+                <div class="lights-container"></div>
+            </div>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn-2">&larr; Back</button>
+            <button class="nav-btn" id="next-btn-2" disabled>Next &rarr;</button>
+        </div>
+    </div>
+
+    <!-- Step 3: Choose Ornaments -->
+    <div id="step3-screen" class="screen step-screen">
+        <h2 class="step-title">Decorate with Ornaments</h2>
+        <div class="options-container ornament-options">
+            <div class="ornament-option" draggable="true" data-ornament="candy-cane">
+                <div class="ornament-preview candy-cane"></div>
+                <p>Candy Cane</p>
+            </div>
+            <div class="ornament-option" draggable="true" data-ornament="deer">
+                <div class="ornament-preview deer"></div>
+                <p>Deer Head</p>
+            </div>
+            <div class="ornament-option" draggable="true" data-ornament="gingerbread">
+                <div class="ornament-preview gingerbread"></div>
+                <p>Gingerbread Man</p>
+            </div>
+        </div>
+        <div class="tree-display" id="ornament-drop-zone">
+            <div id="tree-with-ornaments" class="tree">
+                <div class="lights-container"></div>
+                <div class="ornaments-container"></div>
+            </div>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn-3">&larr; Back</button>
+            <button class="nav-btn" id="next-btn-3">Finish &rarr;</button>
+        </div>
+    </div>
+
+    <!-- Step 4: Finale -->
+    <div id="finale-screen" class="screen">
+        <div class="tree-display finale-display">
+            <div id="final-tree" class="tree">
+                <div class="lights-container"></div>
+                <div class="ornaments-container"></div>
+            </div>
+        </div>
+        <h1 class="finale-title">Merry Christmas!</h1>
+        <div class="snowfall"></div>
+        <audio id="christmas-music" loop>
+            <!-- Fallback: we'll use a simple audio element that can be replaced with actual music -->
+        </audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
