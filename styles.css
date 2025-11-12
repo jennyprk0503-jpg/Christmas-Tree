@@ -1,0 +1,635 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, #0a1f3d 0%, #1a3a5c 100%);
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Welcome Screen */
+#welcome-screen {
+    cursor: pointer;
+}
+
+.title-top {
+    position: absolute;
+    top: 80px;
+    font-size: 3em;
+    color: #ffd700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+.title-bottom {
+    position: absolute;
+    bottom: 100px;
+    font-size: 2.5em;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 10px rgba(255, 107, 107, 0.5);
+}
+
+.click-to-start {
+    position: absolute;
+    bottom: 50px;
+    font-size: 1.2em;
+    color: #fff;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Santa Face */
+.santa-face {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin-bottom: 20px;
+}
+
+.hat {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+}
+
+.hat-top {
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 120px solid #dc143c;
+    margin: 0 auto;
+    position: relative;
+    left: 50px;
+}
+
+.hat-brim {
+    width: 250px;
+    height: 30px;
+    background: white;
+    border-radius: 15px;
+    margin-top: -10px;
+}
+
+.hat-pom {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.face {
+    position: absolute;
+    top: 80px;
+    width: 300px;
+    height: 250px;
+    background: #ffdbac;
+    border-radius: 50%;
+}
+
+.eyes {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 70px 0;
+}
+
+.eye {
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+    0%, 98%, 100% {
+        transform: scaleY(1);
+    }
+    99% {
+        transform: scaleY(0.1);
+    }
+}
+
+.nose {
+    width: 30px;
+    height: 30px;
+    background: #ff6347;
+    border-radius: 50%;
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mouth {
+    width: 60px;
+    height: 30px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 60px 60px;
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.beard {
+    position: absolute;
+    bottom: -80px;
+    width: 100%;
+}
+
+.beard-left, .beard-right {
+    width: 80px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+}
+
+.beard-left {
+    left: 20px;
+}
+
+.beard-right {
+    right: 20px;
+}
+
+.beard-bottom {
+    width: 200px;
+    height: 80px;
+    background: white;
+    border-radius: 0 0 100px 100px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Step Screens */
+.step-title {
+    position: absolute;
+    top: 50px;
+    font-size: 2.5em;
+    color: #ffd700;
+    text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.5);
+}
+
+.options-container {
+    position: absolute;
+    top: 140px;
+    display: flex;
+    gap: 30px;
+    z-index: 10;
+}
+
+.tree-option, .light-option, .ornament-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.tree-option:hover, .light-option:hover, .ornament-option:hover {
+    transform: translateY(-5px);
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.tree-option.selected, .light-option.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+}
+
+.tree-thumbnail {
+    width: 80px;
+    height: 100px;
+    position: relative;
+}
+
+/* Tree Styles */
+.tree {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 300px solid #228b22;
+    position: relative;
+    margin-top: 50px;
+}
+
+.tree::before {
+    content: '';
+    position: absolute;
+    top: 300px;
+    left: -30px;
+    width: 60px;
+    height: 80px;
+    background: #8b4513;
+}
+
+.white-tree {
+    border-bottom-color: #f0f8ff;
+}
+
+.green-tree {
+    border-bottom-color: #228b22;
+}
+
+.pink-tree {
+    border-bottom-color: #ffb6c1;
+}
+
+.blue-tree {
+    border-bottom-color: #add8e6;
+}
+
+.tree-thumbnail .white-tree,
+.tree-thumbnail .green-tree,
+.tree-thumbnail .pink-tree,
+.tree-thumbnail .blue-tree {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 80px solid;
+    position: absolute;
+    left: 0;
+}
+
+.tree-thumbnail .white-tree::before,
+.tree-thumbnail .green-tree::before,
+.tree-thumbnail .pink-tree::before,
+.tree-thumbnail .blue-tree::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: -12px;
+    width: 24px;
+    height: 30px;
+    background: #8b4513;
+}
+
+/* Tree Display */
+.tree-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    margin-top: 80px;
+}
+
+#selected-tree, #tree-with-lights, #tree-with-ornaments {
+    transition: all 0.5s ease;
+}
+
+/* Lights */
+.lights-container {
+    position: absolute;
+    top: 0;
+    left: -150px;
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+}
+
+.light {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+.light-preview {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.light-preview::before,
+.light-preview::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.mixed-lights::before {
+    background: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.mixed-lights::after {
+    background: #0000ff;
+    box-shadow: 0 0 10px #0000ff;
+}
+
+.white-lights::before,
+.white-lights::after {
+    background: #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+}
+
+.yellow-lights::before,
+.yellow-lights::after {
+    background: #ffff00;
+    box-shadow: 0 0 10px #ffff00;
+}
+
+.orange-lights::before,
+.orange-lights::after {
+    background: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+}
+
+/* Ornaments */
+.ornaments-container {
+    position: absolute;
+    top: 0;
+    left: -150px;
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+}
+
+.ornament {
+    position: absolute;
+    cursor: move;
+    pointer-events: all;
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: rotate(-2deg);
+    }
+    50% {
+        transform: rotate(2deg);
+    }
+}
+
+.ornament-preview {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+.candy-cane {
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(135deg,
+        #ff0000 25%, #ffffff 25%, #ffffff 50%,
+        #ff0000 50%, #ff0000 75%, #ffffff 75%);
+    background-size: 10px 10px;
+    border-radius: 10px 10px 0 10px;
+    position: relative;
+}
+
+.candy-cane::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 20px;
+    background: inherit;
+    border-radius: 10px 10px 0 0;
+    transform: rotate(-90deg);
+    transform-origin: bottom left;
+}
+
+.deer {
+    width: 50px;
+    height: 60px;
+    background: #8b4513;
+    border-radius: 50% 50% 40% 40%;
+    position: relative;
+}
+
+.deer::before,
+.deer::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    width: 8px;
+    height: 25px;
+    background: #8b4513;
+}
+
+.deer::before {
+    left: 5px;
+    transform: rotate(-30deg);
+}
+
+.deer::after {
+    right: 5px;
+    transform: rotate(30deg);
+}
+
+.gingerbread {
+    width: 50px;
+    height: 65px;
+    background: #cd853f;
+    border-radius: 25px 25px 10px 10px;
+    position: relative;
+}
+
+.gingerbread::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    width: 30px;
+    height: 8px;
+    background: #cd853f;
+    border-radius: 5px;
+}
+
+.gingerbread::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -15px;
+    width: 30px;
+    height: 8px;
+    background: #cd853f;
+    border-radius: 5px;
+}
+
+/* Navigation */
+.navigation {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: #dc143c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #ff1744;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Finale Screen */
+.finale-display {
+    margin-top: 0;
+}
+
+.finale-title {
+    position: absolute;
+    bottom: 100px;
+    font-size: 4em;
+    color: #ffd700;
+    text-shadow: 3px 3px 15px rgba(255, 215, 0, 0.8);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 3px 3px 15px rgba(255, 215, 0, 0.8);
+    }
+    50% {
+        text-shadow: 3px 3px 30px rgba(255, 215, 0, 1);
+    }
+}
+
+/* Snowfall Animation */
+.snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Drag and Drop Effects */
+.ornament-option.dragging {
+    opacity: 0.5;
+}
+
+#ornament-drop-zone.drag-over {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title-top {
+        font-size: 2em;
+    }
+
+    .title-bottom {
+        font-size: 1.8em;
+    }
+
+    .options-container {
+        gap: 15px;
+    }
+
+    .tree {
+        border-left-width: 100px;
+        border-right-width: 100px;
+        border-bottom-width: 200px;
+    }
+}
