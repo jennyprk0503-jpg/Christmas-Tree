@@ -455,83 +455,27 @@ body {
     font-size: 2em;
 }
 
-/* Candy Cane Ornament */
-.candy-cane {
-    width: 12px;
-    height: 70px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #ff0000 0px,
-        #ff0000 8px,
-        #ffffff 8px,
-        #ffffff 16px
-    );
-    border-radius: 6px;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.candy-cane::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: 35px;
-    height: 12px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #ff0000 0px,
-        #ff0000 8px,
-        #ffffff 8px,
-        #ffffff 16px
-    );
-    border-radius: 6px 6px 0 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.candy-cane::after {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 35px;
-    width: 12px;
-    height: 12px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #ff0000 0px,
-        #ff0000 8px,
-        #ffffff 8px,
-        #ffffff 16px
-    );
-    border-radius: 0 6px 6px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Christmas Ball Ornament */
-.ball {
+/* Striped Ball Ornament - Red and White Diagonal Stripes */
+.striped {
     width: 50px;
     height: 50px;
-    background: radial-gradient(circle at 30% 30%, #ff4444, #cc0000 45%, #990000);
+    background: repeating-linear-gradient(
+        45deg,
+        #ff0000 0px,
+        #ff0000 8px,
+        #ffffff 8px,
+        #ffffff 16px
+    );
     border-radius: 50%;
     position: relative;
     box-shadow:
-        inset -5px -5px 15px rgba(0, 0, 0, 0.4),
-        inset 5px 5px 15px rgba(255, 255, 255, 0.3),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.4),
         0 4px 8px rgba(0, 0, 0, 0.4);
-    animation: ballShine 3s ease-in-out infinite;
-}
-
-@keyframes ballShine {
-    0%, 100% {
-        filter: brightness(1);
-    }
-    50% {
-        filter: brightness(1.1);
-    }
 }
 
 /* Ball cap/top */
-.ball::before {
+.striped::before {
     content: '';
     position: absolute;
     top: -8px;
@@ -545,80 +489,106 @@ body {
 }
 
 /* Shine/highlight on ball */
-.ball::after {
+.striped::after {
     content: '';
     position: absolute;
     top: 12px;
     left: 15px;
     width: 18px;
     height: 12px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 50%;
     transform: rotate(-30deg);
     box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Gingerbread Man Ornament */
-.gingerbread {
-    width: 45px;
-    height: 60px;
-    background: #b8733c;
-    border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+/* Polka Dot Ball Ornament - Gold Background with Red Polka Dots */
+.polka {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #ffd700, #daa520 45%, #b8860b);
+    border-radius: 50%;
     position: relative;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Arms */
-.gingerbread::before {
-    content: '';
-    position: absolute;
-    top: 18px;
-    left: -12px;
-    width: 70px;
-    height: 10px;
-    background: #b8733c;
-    border-radius: 5px;
     box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.3),
-        inset 16px 0 0 0 transparent,
-        inset 19px 0 0 0 #fff,
-        inset 23px 0 0 0 transparent,
-        inset 23px 0 0 0 #b8733c,
-        inset 36px 0 0 0 transparent,
-        inset 39px 0 0 0 #fff,
-        inset 43px 0 0 0 transparent,
-        inset 43px 0 0 0 #b8733c,
-        inset 50px 0 0 0 transparent,
-        inset 53px 0 0 0 #fff;
+        inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Eyes and mouth using after pseudo-element */
-.gingerbread::after {
+/* Red polka dots using box-shadow */
+.polka::before {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 12px;
-    width: 4px;
-    height: 4px;
-    background: #333;
+    top: 12px;
+    left: 10px;
+    width: 6px;
+    height: 6px;
+    background: #cc0000;
     border-radius: 50%;
     box-shadow:
-        /* Right eye */
-        17px 0 0 0 #333,
-        /* Smile curve - left to right */
-        -4px 10px 0 -1px #333,
-        0px 12px 0 -1px #333,
-        4px 13px 0 -1px #333,
-        8px 13px 0 -1px #333,
-        12px 13px 0 -1px #333,
-        16px 12px 0 -1px #333,
-        20px 10px 0 -1px #333,
-        /* Button 1 */
-        4px 25px 0 0 #fff,
-        /* Button 2 */
-        4px 35px 0 0 #fff,
-        /* Button 3 */
-        4px 44px 0 0 #fff;
+        15px 3px 0 0 #cc0000,
+        25px 8px 0 0 #cc0000,
+        8px 22px 0 0 #cc0000,
+        20px 20px 0 0 #cc0000,
+        30px 24px 0 0 #cc0000,
+        5px 32px 0 0 #cc0000,
+        18px 35px 0 0 #cc0000,
+        28px 36px 0 0 #cc0000;
+}
+
+/* Gold cap/top */
+.polka::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 10px;
+    background: linear-gradient(to bottom, #b8860b, #daa520);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Silver Ball Ornament - Plain Silver */
+.silver {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #f5f5f5, #d3d3d3 45%, #a9a9a9);
+    border-radius: 50%;
+    position: relative;
+    box-shadow:
+        inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.6),
+        0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Ball cap/top */
+.silver::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 10px;
+    background: linear-gradient(to bottom, #b8860b, #daa520);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Shine/highlight on ball */
+.silver::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    width: 18px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transform: rotate(-30deg);
+    box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.4);
 }
 
 /* Navigation */
