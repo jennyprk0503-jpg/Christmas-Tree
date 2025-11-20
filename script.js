@@ -189,6 +189,21 @@ function createOrnamentAt(ornamentType, x, y) {
     ornament.style.transform = 'translate(-50%, -50%)';
     ornament.style.position = 'absolute';
 
+    // Add random colors for Christmas balls
+    if (ornamentType === 'ball') {
+        const ballColors = [
+            'radial-gradient(circle at 30% 30%, #ff4444, #cc0000 45%, #990000)', // Red
+            'radial-gradient(circle at 30% 30%, #4444ff, #0000cc 45%, #000099)', // Blue
+            'radial-gradient(circle at 30% 30%, #44ff44, #00cc00 45%, #009900)', // Green
+            'radial-gradient(circle at 30% 30%, #ffff44, #cccc00 45%, #999900)', // Gold
+            'radial-gradient(circle at 30% 30%, #ff44ff, #cc00cc 45%, #990099)', // Purple
+            'radial-gradient(circle at 30% 30%, #44ffff, #00cccc 45%, #009999)', // Cyan
+            'radial-gradient(circle at 30% 30%, #ffaa44, #cc7700 45%, #995500)'  // Orange
+        ];
+        const randomColor = ballColors[Math.floor(Math.random() * ballColors.length)];
+        ornament.style.background = randomColor;
+    }
+
     // Add click to remove functionality
     ornament.addEventListener('click', (e) => {
         e.stopPropagation();
