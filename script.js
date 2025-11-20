@@ -169,16 +169,83 @@ nextBtn2.addEventListener('click', () => {
     step3LightsContainer.innerHTML = lightsContainer.innerHTML;
 });
 
-// Step 3: Ornaments (Drag and Drop)
+// Step 3: Ornaments (Click to Select + Click to Place OR Drag and Drop)
 const ornamentOptions = document.querySelectorAll('.ornament-option');
 const dropZone = document.getElementById('ornament-drop-zone');
 const ornamentsContainer = document.querySelector('#tree-with-ornaments .ornaments-container');
 const nextBtn3 = document.getElementById('next-btn-3');
 const prevBtn3 = document.getElementById('prev-btn-3');
 
+let selectedOrnamentType = null;
 let draggedOrnamentType = null;
+let cursorPreview = null;
 
+// Function to create an ornament at a specific position
+function createOrnamentAt(ornamentType, x, y) {
+    const ornament = document.createElement('div');
+    ornament.className = `ornament ${ornamentType}`;
+    ornament.style.left = `${x}px`;
+    ornament.style.top = `${y}px`;
+    ornament.style.transform = 'translate(-50%, -50%)';
+    ornament.style.position = 'absolute';
+
+    // Add click to remove functionality
+    ornament.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playSound(600, 100);
+        ornament.remove();
+
+        // Remove from state
+        const index = state.ornaments.findIndex(o =>
+            o.type === ornamentType && o.x === x && o.y === y
+        );
+        if (index > -1) {
+            state.ornaments.splice(index, 1);
+        }
+    });
+
+    // Add hover effect
+    ornament.style.cursor = 'pointer';
+    ornament.title = 'Click to remove';
+
+    ornamentsContainer.appendChild(ornament);
+
+    // Save to state
+    state.ornaments.push({
+        type: ornamentType,
+        x: x,
+        y: y
+    });
+}
+
+// Click to select ornament
 ornamentOptions.forEach(option => {
+    // Click to select
+    option.addEventListener('click', (e) => {
+        if (e.target.closest('.ornament-option')) {
+            playSound(950, 100);
+
+            // Toggle selection
+            if (selectedOrnamentType === option.dataset.ornament) {
+                // Deselect
+                selectedOrnamentType = null;
+                ornamentOptions.forEach(opt => opt.classList.remove('selected'));
+                dropZone.style.cursor = 'default';
+                if (cursorPreview) {
+                    cursorPreview.remove();
+                    cursorPreview = null;
+                }
+            } else {
+                // Select
+                selectedOrnamentType = option.dataset.ornament;
+                ornamentOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                dropZone.style.cursor = 'crosshair';
+            }
+        }
+    });
+
+    // Drag and drop support
     option.addEventListener('dragstart', (e) => {
         draggedOrnamentType = option.dataset.ornament;
         option.classList.add('dragging');
@@ -190,6 +257,52 @@ ornamentOptions.forEach(option => {
     });
 });
 
+// Mouse move to show preview
+dropZone.addEventListener('mousemove', (e) => {
+    if (selectedOrnamentType && !cursorPreview) {
+        cursorPreview = document.createElement('div');
+        cursorPreview.className = `ornament ${selectedOrnamentType}`;
+        cursorPreview.style.position = 'fixed';
+        cursorPreview.style.pointerEvents = 'none';
+        cursorPreview.style.opacity = '0.6';
+        cursorPreview.style.transform = 'translate(-50%, -50%)';
+        cursorPreview.style.zIndex = '10000';
+        document.body.appendChild(cursorPreview);
+    }
+
+    if (cursorPreview) {
+        cursorPreview.style.left = `${e.clientX}px`;
+        cursorPreview.style.top = `${e.clientY}px`;
+    }
+});
+
+dropZone.addEventListener('mouseleave', () => {
+    if (cursorPreview && selectedOrnamentType) {
+        cursorPreview.style.opacity = '0';
+    }
+});
+
+dropZone.addEventListener('mouseenter', () => {
+    if (cursorPreview && selectedOrnamentType) {
+        cursorPreview.style.opacity = '0.6';
+    }
+});
+
+// Click to place ornament
+dropZone.addEventListener('click', (e) => {
+    if (!selectedOrnamentType) return;
+
+    playSound(1000, 100);
+
+    // Get click position relative to ornaments container
+    const rect = ornamentsContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    createOrnamentAt(selectedOrnamentType, x, y);
+});
+
+// Drag and drop support
 dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropZone.classList.add('drag-over');
@@ -207,27 +320,12 @@ dropZone.addEventListener('drop', (e) => {
 
     playSound(1000, 100);
 
-    // Get drop position relative to tree
-    const rect = dropZone.getBoundingClientRect();
+    // Get drop position relative to ornaments container
+    const rect = ornamentsContainer.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Create ornament element
-    const ornament = document.createElement('div');
-    ornament.className = `ornament ${draggedOrnamentType}`;
-    ornament.style.left = `${x}px`;
-    ornament.style.top = `${y}px`;
-    ornament.style.transform = 'translate(-50%, -50%)';
-
-    // Add to container
-    ornamentsContainer.appendChild(ornament);
-
-    // Save to state
-    state.ornaments.push({
-        type: draggedOrnamentType,
-        x: x,
-        y: y
-    });
+    createOrnamentAt(draggedOrnamentType, x, y);
 
     draggedOrnamentType = null;
 });

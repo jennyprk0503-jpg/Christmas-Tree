@@ -217,9 +217,22 @@ body {
     text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.5);
 }
 
+.instruction-text {
+    position: absolute;
+    top: 110px;
+    font-size: 1.1em;
+    color: #ffffff;
+    text-align: center;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
 .options-container {
     position: absolute;
-    top: 140px;
+    top: 160px;
     display: flex;
     gap: 30px;
     z-index: 10;
@@ -609,8 +622,27 @@ body {
     opacity: 0.5;
 }
 
+.ornament-option.selected {
+    border-color: #00ff00;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
+    background: rgba(0, 255, 0, 0.1);
+}
+
+#ornament-drop-zone {
+    transition: background 0.3s ease;
+}
+
 #ornament-drop-zone.drag-over {
     background: rgba(255, 215, 0, 0.1);
+}
+
+.ornament:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: brightness(1.2);
+}
+
+.tree-display {
+    position: relative;
 }
 
 /* Responsive adjustments */
