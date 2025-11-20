@@ -267,6 +267,32 @@ body {
     position: relative;
 }
 
+/* Color Indicator Circles */
+.color-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.white-color {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 50%, #e6f2ff 100%);
+}
+
+.green-color {
+    background: linear-gradient(135deg, #2d8b3d 0%, #228b22 50%, #1a6b1a 100%);
+}
+
+.pink-color {
+    background: linear-gradient(135deg, #ffc9d9 0%, #ffb6c1 50%, #ffa3b0 100%);
+}
+
+.blue-color {
+    background: linear-gradient(135deg, #c9e8f5 0%, #add8e6 50%, #9ac8d9 100%);
+}
+
 /* Tree Styles */
 .tree {
     width: 0;
